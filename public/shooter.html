@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Shot your shot</title>
+        <link href="styles.css" rel="stylesheet"/>
+    </head>
+    <body>
+        <div id = "app" v:bind:style="background-img: url('yay.jpg')">
+            <div class = "allDone" v-show="ended">
+                YOU DID IT!
+                <img src="yay.jpg" alt="Celebration">
+            </div>
+            <h1 v-if="welcomeText || !(ended)">Hit the Targets</h1>
+            <div v-for="target in targets">
+                    {{target.message}}
+                <div v-on:click.once = "hit(target)" class="" v-bind:style="{top: target.top + 'px', left: target.left + 'px'}" v-bind:class = " target.expand ? ['expand', 'target'] : 'target'"> </div>
+            </div>
+            <div v-if="!(ended)" id = "health">
+                <div v-bind:style="{ width: health + '%'}"></div>
+            </div>        
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src = "script.js"></script>
+    </body>
+</html>
