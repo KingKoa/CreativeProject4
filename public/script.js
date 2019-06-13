@@ -61,9 +61,10 @@ var app = new Vue ({
             ++this.hits;
             this.targets[index].expand = true;
 
-            if (this.hits >= 10) {
+            if (this.hits >= 2) {
                 this.pause();
                 this.ended = true;
+                
             }
             if (!(this.ended)) {
                 this.makeTarget();
