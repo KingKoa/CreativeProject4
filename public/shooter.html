@@ -7,20 +7,35 @@
     </style>
     <head>
         <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-        <link rel="stylesheet" href="styles.css" />
+        <link rel="stylesheet" href="/styles.css" />
         <title>Prepare Yourself</title>
       </head>
     <body>
+        <p>
+            I MADE CHANGES!!!!
+        </p>
         <div id = "app" v:bind:style="background-img: url('yay.jpg')">
 
             <div class = "allDone" v-show="ended">
-                {{ formattedTime }}
-                YOU DID IT!
-                <img src="yay.jpg" alt="Celebration">
+                It took you {{ formattedTime }} seconds
+                    <input v-model="usrName" type="text" @submit="addTopTen" placeholder="Enter A Nick Name"/>  
+                    <button class="" @click.once="addTopTen(usrName)">Submit</button>
+
+                <a href="highScores.html">Top Ten Times!</a>
+                <a href="index.html">Restart</a>
             </div>
+<<<<<<< HEAD
             <h1>{{currentCountdown}}</h1>
             <button @click="start"></button>
         <div v-show="ready">
+=======
+<<<<<<< HEAD
+            <h1 v-if="welcomeText">Hit The Targets</h1>
+            <div v-for="target in targets">
+                    {{target.message}}
+                <div @click.once = "hit(target)" class="" v-bind:style="{top: target.top + 'px', left: target.left + 'px'}" v-bind:class = " target.expand ? ['expand', 'target'] : 'target'"> </div>
+=======
+>>>>>>> bcc1f338df2140818c64f0365678a2e2efaea27b
             <h1 v-if="welcomeText || !(ended)">Hit The Targets</h1>
             <button @click="start"></button>
              
@@ -30,6 +45,7 @@
                         <embed src="Metal Clang-SoundBible.com-19572601.mp3" autostart="true" loop="true" width="2" height="0">
                 </div>
 
+>>>>>>> ba3ac3a9b46d9b6dc0cf2f06c8c5a02a0ce2332e
             </div>
             <div v-if="!(ended)" id="health">
                     <embed src="Guile_s_theme_extended-JGw8DWctAts.mp3" autostart="true" loop="true" width="2" height="0">
@@ -42,6 +58,6 @@
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js" integrity="sha256-mpnrJ5DpEZZkwkE1ZgkEQQJW/46CSEh/STrZKOB/qoM=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.7/vue.js" integrity="sha256-g+Q8DFAmG5+eyRPSydX0LY4TfjsL11XSDrIGerbbEdA=" crossorigin="anonymous"></script>
-        <script src="script.js"></script>
+        <script src="/script.js"></script>
     </body>
 </html>
