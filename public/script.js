@@ -8,7 +8,7 @@ var app = new Vue ({
             left: Math.random() * (screen.width - 100),
             expand: false
         },  ],
-
+        message: "",
         welcomeText: true,
         currentTimer: null,
         hits: 0,
@@ -75,7 +75,7 @@ var app = new Vue ({
             var index = this.targets.indexOf(item);
             ++this.hits;
             this.targets[index].expand = true;
-            
+
             if (this.hits >= 1) {
                 this.welcomeText = false;
             }

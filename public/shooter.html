@@ -11,9 +11,6 @@
         <title>Prepare Yourself</title>
       </head>
     <body>
-        <p>
-            I MADE CHANGES!!!!
-        </p>
         <div id = "app" v:bind:style="background-img: url('yay.jpg')">
 
             <div class = "allDone" v-show="ended">
@@ -24,28 +21,19 @@
                 <a href="highScores.html">Top Ten Times!</a>
                 <a href="index.html">Restart</a>
             </div>
-<<<<<<< HEAD
             <h1 v-if="welcomeText">Hit The Targets</h1>
             <div v-for="target in targets">
                     {{target.message}}
-                <div @click.once = "hit(target)" class="" v-bind:style="{top: target.top + 'px', left: target.left + 'px'}" v-bind:class = " target.expand ? ['expand', 'target'] : 'target'"> </div>
-=======
-            <h1 v-if="welcomeText || !(ended)">Hit The Targets</h1>
-            <button @click="start"></button>
-             
-            <div v-for="target in targets">
-                    {{target.message}}
-                <div v-on:click.once = "hit(target)" class="" v-bind:style="{top: target.top + 'px', left: target.left + 'px'}" v-bind:class = " target.expand ? ['expand', 'target'] : 'target'">
-                        <embed src="Metal Clang-SoundBible.com-19572601.mp3" autostart="true" loop="true" width="2" height="0">
-                </div>
 
->>>>>>> ba3ac3a9b46d9b6dc0cf2f06c8c5a02a0ce2332e
+                <div v-on:click.once = "hit(target)" class="" v-bind:style="{top: target.top + 'px', left: target.left + 'px'}" v-bind:class = " target.expand ? ['expand', 'target'] : 'target'">
+                        <embed src="/Metal Clang-SoundBible.com-19572601.mp3" autostart="true" loop="true" width="2" height="0">
+                </div>
             </div>
             <div v-if="!(ended)" id="health">
-                    <embed src="Guile_s_theme_extended-JGw8DWctAts.mp3" autostart="true" loop="true" width="2" height="0">
+                    <embed src="/Guile_s_theme_extended-JGw8DWctAts.mp3" autostart="true" loop="true" width="2" height="0">
                 </div>   
                 <div v-else>
-                        <embed src="Victory_-_Free_Sound_Effect-yP3yc7EraBU.mp3" autostart="true" loop="false" width="2" height="0">
+                        <embed src="/Victory_-_Free_Sound_Effect-yP3yc7EraBU.mp3" autostart="true" loop="false" width="2" height="0">
                 </div>  
         </div>
 
