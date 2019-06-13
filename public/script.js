@@ -75,12 +75,15 @@ var app = new Vue ({
             var index = this.targets.indexOf(item);
             ++this.hits;
             this.targets[index].expand = true;
+            
             if (this.hits >= 1) {
                 this.welcomeText = false;
             }
             if (this.hits >= 10) {
+
                 this.pause();
                 this.ended = true;
+                
             }
             if (!(this.ended)) {
                 this.makeTarget();
