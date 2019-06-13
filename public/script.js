@@ -1,3 +1,5 @@
+
+
 var app = new Vue ({
     el: '#app',
     data: {
@@ -8,32 +10,56 @@ var app = new Vue ({
         },  ],
 
         welcomeText: true,
-        health: 100,
+        currentTimer: null,
         hits: 0,
+        timerState: 'stopped',
         ended: false,
+        formattedTime: "00:00:00"
     },
 
     created: {
-        endWelcomeText: setTimeout(() => this.welcomeText=false, 2000)
+        
     },
 
     methods: {
+        pause: function() {
+            window.clearInterval(this.ticker);
+            this.timerState = 'paused';
+          },
+        start: function() {
+            if (this.timerState !== 'running') {
+                this.tick();
+                this.timerState = 'running';
+            }
+        },
+        
+        tick: function() {
+            this.ticker = setInterval(() => {
+              this.currentTimer++;
+              this.formattedTime = this.formatTime(this.currentTimer);
+            }, 1000)
+        },
+
+        formatTime: function(seconds) {
+            let measuredTime = new Date(null);
+            measuredTime.setSeconds(seconds);
+            console.log(measuredTime.toISOString());
+            let MHSTime = measuredTime.toISOString().substr(11, 8);
+            return MHSTime;
+        },
+
         hit: function(item) {
             var index = this.targets.indexOf(item);
-            this.health -= 20;
+            ++this.hits;
+            this.targets[index].expand = true;
 
-            if (this.health <= 0) {
+            if (this.hits >= 10) {
+                this.pause();
                 this.ended = true;
             }
-
-            this.targets[index].expand = true;
-            //setTimeout(this.deleteTarget(item), 3000);
-
-            if (this.health > 0) {
+            if (!(this.ended)) {
                 this.makeTarget();
-            }
-
-            ++this.hits;
+            }   
         },
 
         deleteTarget: function(item) {
@@ -42,7 +68,6 @@ var app = new Vue ({
         },
 
         restart: function() {
-            this.health = 100;
             this.ended = false;
         },
 
