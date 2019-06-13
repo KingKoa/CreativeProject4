@@ -13,22 +13,22 @@
     <body>
         <div id = "app" v:bind:style="background-img: url('yay.jpg')">
 
-            <div v-show="ended">
+
+            <div class = "allDone" v-show="ended">
                 <img class="shells" src="gunSmoke.jpg" alt="gunner">
-                <h1 class="allDone">It took you {{ formattedTime }} seconds.</h1>
-                    <input class="enterUser" v-model="usrName" type="text" @submit="addTopTen" placeholder="Enter A Nick Name"/>  
-                    <h1> </h1>
-                    
-                <h1> </h1>
-                <form v-on submit="index.html">
-                   <p> <button class="button" @click.once="addTopTen(usrName)">Submit</button>
-                    <button class="button" type="submit">RESTART</button> </p>
-                </form>
-                
-                
-
-                
-
+                It took you {{ currentTimer }} seconds
+                    <input class="enterUser" v-model="usrName" type="text" @submit="addTopTen" @submit="getScores" placeholder="Enter A Nick Name"/>  
+                    <button @click.once="addTopTen(usrName)">Submit</button>
+                    <form v-on submit="index.html">
+                        <p> 
+                            <button class="button" type="submit">RESTART</button> 
+                        </p>
+                    </form>
+                    <button @click="getScores">Refresh Last 10 Players</button>
+                    <h2>Last 10 Players</h2>
+                    <div v-for="person in scores" :key="scores.id">
+                            {{ person.name }} - - - {{ person.time }} Seconds
+                    </div>
             </div>
         <div v-show="!(ready)"><h1 class="countdown">{{currentCountdown}}</h1></div>
         <div v-show="ready">

@@ -11,11 +11,11 @@ var app = new Vue ({
         },  ],
         message: "",
         welcomeText: true,
-        currentTimer: null,
+        currentTimer: 0,
         hits: 0,
         timerState: 'stopped',
         ended: false,
-        formattedTime: "00:00:00",
+        //formattedTime: "00:00:00",
         currentCountdown: 3,
         ready: false,
 
@@ -48,20 +48,26 @@ var app = new Vue ({
             }
           },
 
+          deleteScores: async function() {
+            let response = await axios.delete("/api/scores");
+          },
+
         addTopTen: async function(userName) {
             try {
-                let num = 0;
-                let length = this.getScores();
 
-                while(scores.num.time <= this.formatTime || num < length) {
-                    ++num;
-                }
+                await this.getScores();
+
+                let length = this.scores.length;
 
                 let result = await axios.post('/api/scores', {
-                id: num,
+                id: length,
                 name: userName,
-                time: this.formattedTime,
+                time: this.currentTimer,
                 });
+
+                if (length >= 9) {
+                    await this.deleteScores();
+                }
             } catch (error) {
                 console.log(error);
             } 
@@ -93,9 +99,10 @@ var app = new Vue ({
         tick: function() {
             this.ticker = setInterval(() => {
               this.currentTimer++;
-              this.formattedTime = this.formatTime(this.currentTimer);
+              //this.formattedTime = this.formatTime(this.currentTimer);
             }, 1000)
         },
+
         tickDown: function(){
             this.ticker = setInterval(() => {
                 this.currentCountdown--; 
@@ -103,12 +110,12 @@ var app = new Vue ({
               }, 1000)
         },
 
-        formatTime: function(seconds) {
-            let measuredTime = new Date(null);
-            measuredTime.setSeconds(seconds);
-            let MHSTime = measuredTime.toISOString().substr(11, 8);
-            return MHSTime;
-        },
+        // formatTime: function(seconds) {
+        //     let measuredTime = new Date(null);
+        //     measuredTime.setSeconds(seconds);
+        //     let MHSTime = measuredTime.toISOString().substr(11, 8);
+        //     return MHSTime;
+        // },
 
         hit: function(item) {
             var index = this.targets.indexOf(item);
