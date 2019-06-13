@@ -15,13 +15,12 @@ var itemsRef = db.collection('scores');
 
 app.post('/api/scores', async (req, res) => {
     try {
-        let querySnapshot = await itemsRef.get();
-        let numRecords = querySnapshot.docs.length;
         let item = {
             id: req.body.id,
             name: req.body.name,
             time: req.body.time
         };
+        
         itemsRef.doc(item.id.toString()).set(item);
         res.send(item);
       } catch (error) {
@@ -32,12 +31,19 @@ app.post('/api/scores', async (req, res) => {
 
 app.get('/api/scores', async (req, res) => {
   try{
-      let numRecords = querySnapshot.docs.length;
       let querySnapshot = await itemsRef.get();
       res.send(querySnapshot.docs.map(doc => doc.data()));
-      return numRecords;
   }catch(err){
       res.sendStatus(500);
+  }
+});
+
+app.delete('api/scores', async (req, res) => {
+  try {
+    itemsRef.doc(0).delete();
+    res.send(true);
+  } catch(err) {
+    res.sendStatus(500);
   }
 });
 
