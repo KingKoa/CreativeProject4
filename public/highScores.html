@@ -8,8 +8,8 @@
 
 <body>
   <div id="app">
-      <div v-for="score in scores" :key="score.id">
-          {{ score.name }}  - - - {{ score.time }}
+      <div v-for="scores in 10" :key="scores.id">
+          {{ scores.name }}  - - - {{ scores.time }}
       </div>
   </div>
   <div class="footer">

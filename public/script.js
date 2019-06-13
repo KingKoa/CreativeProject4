@@ -14,7 +14,18 @@ var app = new Vue ({
         hits: 0,
         timerState: 'stopped',
         ended: false,
-        formattedTime: "00:00:00"
+        formattedTime: "00:00:00",
+        currentCountdown: 3,
+        ready: false,
+
+    },
+    watch: {
+        currentCountdown: function() {
+            if (this.currentCountdown == 0) {
+                this.pauseCountDown();
+                this.start();
+            }
+        }
     },
 
     created: function() {
@@ -38,7 +49,15 @@ var app = new Vue ({
 
         addTopTen: async function(userName) {
             try {
+                let num = 0;
+                let length = this.getScores();
+
+                while(scores.num.time <= this.formatTime || num < length) {
+                    ++num;
+                }
+
                 let result = await axios.post('/api/scores', {
+                id: num,
                 name: userName,
                 time: this.formattedTime,
                 });
@@ -50,11 +69,24 @@ var app = new Vue ({
             window.clearInterval(this.ticker);
             this.timerState = 'paused';
           },
+
+        pauseCountDown: function() {
+            window.clearInterval(this.ticker);
+            this.timerState = 'paused';
+        },
+
         start: function() {
-            if (this.timerState !== 'running') {
-                this.tick();
-                this.timerState = 'running';
+
+            this.tickDown();
+            console.log(this.currentCountdown);
+            if(this.currentCountdown == 0){
+                this.ready=true;
+                if (this.timerState !== 'running') {
+                    this.tick();
+                    this.timerState = 'running';
+                }
             }
+            
         },
         
         tick: function() {
@@ -62,6 +94,12 @@ var app = new Vue ({
               this.currentTimer++;
               this.formattedTime = this.formatTime(this.currentTimer);
             }, 1000)
+        },
+        tickDown: function(){
+            this.ticker = setInterval(() => {
+                this.currentCountdown--; 
+                
+              }, 1000)
         },
 
         formatTime: function(seconds) {

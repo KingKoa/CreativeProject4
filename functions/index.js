@@ -18,7 +18,7 @@ app.post('/api/scores', async (req, res) => {
         let querySnapshot = await itemsRef.get();
         let numRecords = querySnapshot.docs.length;
         let item = {
-            id: numRecords + 1,
+            id: req.body.id,
             name: req.body.name,
             time: req.body.time
         };
@@ -32,8 +32,10 @@ app.post('/api/scores', async (req, res) => {
 
 app.get('/api/scores', async (req, res) => {
   try{
+      let numRecords = querySnapshot.docs.length;
       let querySnapshot = await itemsRef.get();
       res.send(querySnapshot.docs.map(doc => doc.data()));
+      return numRecords;
   }catch(err){
       res.sendStatus(500);
   }

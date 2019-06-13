@@ -21,11 +21,12 @@
                 <a href="highScores.html">Top Ten Times!</a>
                 <a href="index.html">Restart</a>
             </div>
+        <div v-show="!(ready)"><h1>{{currentCountdown}}</h1></div>
+        <div v-show="ready">
             <h1 v-if="welcomeText">Hit The Targets</h1>
             <div v-for="target in targets">
                     {{target.message}}
-
-                <div v-on:click.once = "hit(target)" class="" v-bind:style="{top: target.top + 'px', left: target.left + 'px'}" v-bind:class = " target.expand ? ['expand', 'target'] : 'target'">
+                <div @click.once = "hit(target)" class="" v-bind:style="{top: target.top + 'px', left: target.left + 'px'}" v-bind:class = " target.expand ? ['expand', 'target'] : 'target'">
                         <embed src="/Metal Clang-SoundBible.com-19572601.mp3" autostart="true" loop="true" width="2" height="0">
                 </div>
             </div>
@@ -35,6 +36,7 @@
                 <div v-else>
                         <embed src="/Victory_-_Free_Sound_Effect-yP3yc7EraBU.mp3" autostart="true" loop="false" width="2" height="0">
                 </div>  
+        </div>
         </div>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js" integrity="sha256-mpnrJ5DpEZZkwkE1ZgkEQQJW/46CSEh/STrZKOB/qoM=" crossorigin="anonymous"></script>
