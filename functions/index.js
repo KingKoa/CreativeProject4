@@ -20,6 +20,7 @@ app.post('/api/scores', async (req, res) => {
             name: req.body.name,
             time: req.body.time
         };
+        
         itemsRef.doc(item.id.toString()).set(item);
         res.send(item);
       } catch (error) {
@@ -34,6 +35,15 @@ app.get('/api/scores', async (req, res) => {
       res.send(querySnapshot.docs.map(doc => doc.data()));
   }catch(err){
       res.sendStatus(500);
+  }
+});
+
+app.delete('api/scores', async (req, res) => {
+  try {
+    itemsRef.doc(0).delete();
+    res.send(true);
+  } catch(err) {
+    res.sendStatus(500);
   }
 });
 
