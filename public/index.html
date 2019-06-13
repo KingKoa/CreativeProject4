@@ -7,14 +7,21 @@
 </head>
 
 <body>
-  <div id="app"></div>
+  <div id="app">
+    <h1>Shooter.IO</h1>
+    <p>
+      Click Ten Targets. Try to get the Fastest Time
+    </p>
+    <form action="shooter.html" @submit="setUsername">
+      <button class = "startButton" type ="submit">Start</button>
+    </form>
+  </div>
   <div class="footer">
-    <a href="shooter.html">Start</a>
     <a href="https://github.com/KingKoa/creativeFinal">GitHub</a>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js" integrity="sha256-mpnrJ5DpEZZkwkE1ZgkEQQJW/46CSEh/STrZKOB/qoM=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.7/vue.js" integrity="sha256-g+Q8DFAmG5+eyRPSydX0LY4TfjsL11XSDrIGerbbEdA=" crossorigin="anonymous"></script>
-  <script src="/script.js"></script>
+  <script src="script.js"></script>
 </body>
 
 </html>

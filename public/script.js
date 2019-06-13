@@ -3,6 +3,11 @@
 var app = new Vue ({
     el: '#app',
     data: {
+        newUsrName: "",
+        player: {
+            userName: "",
+            time: ""
+        },
         targets: [{
             top: Math.random() * (screen.height - 200),
             left: Math.random() * (screen.width - 100),
@@ -22,6 +27,9 @@ var app = new Vue ({
     },
 
     methods: {
+        setUsername: function() {
+            this.player.userName = this.newUsrName; 
+        },
         pause: function() {
             window.clearInterval(this.ticker);
             this.timerState = 'paused';

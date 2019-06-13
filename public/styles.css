@@ -1,6 +1,8 @@
+.startButton {
+    height: 100px;
+    width: 100px;
+}
 html {
-    
-    cursor: crosshair;
 }
 
 .allDone {
