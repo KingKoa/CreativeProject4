@@ -19,7 +19,10 @@ var app = new Vue ({
         hits: 0,
         timerState: 'stopped',
         ended: false,
-        formattedTime: "00:00:00"
+        formattedTime: "00:00:00",
+        currentCountdown: 3,
+        ready: false,
+
     },
 
     created: {
@@ -35,10 +38,18 @@ var app = new Vue ({
             this.timerState = 'paused';
           },
         start: function() {
-            if (this.timerState !== 'running') {
-                this.tick();
-                this.timerState = 'running';
+
+            this.tickDown();
+            console.log(this.currentCountdown);
+            if(this.currentCountdown == 0){
+                this.ready=true;
+                console.log(ready);
+                if (this.timerState !== 'running') {
+                    this.tick();
+                    this.timerState = 'running';
+                }
             }
+            
         },
         
         tick: function() {
@@ -46,6 +57,12 @@ var app = new Vue ({
               this.currentTimer++;
               this.formattedTime = this.formatTime(this.currentTimer);
             }, 1000)
+        },
+        tickDown: function(){
+            this.ticker = setInterval(() => {
+                this.currentCountdown--; 
+                
+              }, 1000)
         },
 
         formatTime: function(seconds) {

@@ -18,6 +18,9 @@
                 YOU DID IT!
                 <img src="yay.jpg" alt="Celebration">
             </div>
+            <h1>{{currentCountdown}}</h1>
+            <button @click="start"></button>
+        <div v-show="ready">
             <h1 v-if="welcomeText || !(ended)">Hit The Targets</h1>
             <button @click="start"></button>
              
@@ -34,6 +37,7 @@
                 <div v-else>
                         <embed src="Victory_-_Free_Sound_Effect-yP3yc7EraBU.mp3" autostart="true" loop="false" width="2" height="0">
                 </div>  
+        </div>
         </div>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js" integrity="sha256-mpnrJ5DpEZZkwkE1ZgkEQQJW/46CSEh/STrZKOB/qoM=" crossorigin="anonymous"></script>
