@@ -2,28 +2,37 @@
 <html>
     <style type="text/css">
         html {
-            cursor: crosshair;
+            cursor: crosshair
         }
     </style>
     <head>
         <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-        <link rel="stylesheet" href="/styles.css" />
+        <link rel="stylesheet" href="styles.css" />
         <title>Prepare Yourself</title>
       </head>
     <body>
         <div id = "app" v:bind:style="background-img: url('yay.jpg')">
 
-            <div class = "allDone" v-show="ended">
-                It took you {{ formattedTime }} seconds
-                    <input v-model="usrName" type="text" @submit="addTopTen" placeholder="Enter A Nick Name"/>  
-                    <button class="" @click.once="addTopTen(usrName)">Submit</button>
+            <div v-show="ended">
+                <img class="shells" src="gunSmoke.jpg" alt="gunner">
+                <h1 class="allDone">It took you {{ formattedTime }} seconds.</h1>
+                    <input class="enterUser" v-model="usrName" type="text" @submit="addTopTen" placeholder="Enter A Nick Name"/>  
+                    <h1> </h1>
+                    
+                <h1> </h1>
+                <form v-on submit="index.html">
+                   <p> <button class="button" @click.once="addTopTen(usrName)">Submit</button>
+                    <button class="button" type="submit">RESTART</button> </p>
+                </form>
+                
+                
 
-                <a href="highScores.html">Top Ten Times!</a>
-                <a href="index.html">Restart</a>
+                
+
             </div>
-        <div v-show="!(ready)"><h1>{{currentCountdown}}</h1></div>
+        <div v-show="!(ready)"><h1 class="countdown">{{currentCountdown}}</h1></div>
         <div v-show="ready">
-            <h1 v-if="welcomeText">Hit The Targets</h1>
+            <h1 v-if="welcomeText" class="countdown">Hit The Targets</h1>
             <div v-for="target in targets">
                     {{target.message}}
                 <div @click.once = "hit(target)" class="" v-bind:style="{top: target.top + 'px', left: target.left + 'px'}" v-bind:class = " target.expand ? ['expand', 'target'] : 'target'">
@@ -41,6 +50,6 @@
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js" integrity="sha256-mpnrJ5DpEZZkwkE1ZgkEQQJW/46CSEh/STrZKOB/qoM=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.7/vue.js" integrity="sha256-g+Q8DFAmG5+eyRPSydX0LY4TfjsL11XSDrIGerbbEdA=" crossorigin="anonymous"></script>
-        <script src="/script.js"></script>
+        <script src="script.js"></script>
     </body>
 </html>
