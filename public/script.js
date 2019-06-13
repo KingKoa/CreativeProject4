@@ -1,13 +1,8 @@
-
-
 var app = new Vue ({
     el: '#app',
     data: {
-        newUsrName: "",
-        player: {
-            userName: "",
-            time: ""
-        },
+        scores: [],
+        usrName: "",
         targets: [{
             top: Math.random() * (screen.height - 200),
             left: Math.random() * (screen.width - 100),
@@ -22,13 +17,34 @@ var app = new Vue ({
         formattedTime: "00:00:00"
     },
 
-    created: {
-        
+    created: function() {
+        this.getScores();
+    },
+
+    mounted: function() {
+        this.start();
     },
 
     methods: {
-        setUsername: function() {
-            this.player.userName = this.newUsrName; 
+        getScores: async function() {
+            try {
+              let response = await axios.get("/api/scores");
+              this.scores = response.data;
+              return true;
+            } catch (error) {
+              console.log(error);
+            }
+          },
+
+        addTopTen: async function(userName) {
+            try {
+                let result = await axios.post('/api/scores', {
+                name: userName,
+                time: this.formattedTime,
+                });
+            } catch (error) {
+                console.log(error);
+            } 
         },
         pause: function() {
             window.clearInterval(this.ticker);
@@ -51,7 +67,6 @@ var app = new Vue ({
         formatTime: function(seconds) {
             let measuredTime = new Date(null);
             measuredTime.setSeconds(seconds);
-            console.log(measuredTime.toISOString());
             let MHSTime = measuredTime.toISOString().substr(11, 8);
             return MHSTime;
         },
@@ -60,7 +75,9 @@ var app = new Vue ({
             var index = this.targets.indexOf(item);
             ++this.hits;
             this.targets[index].expand = true;
-
+            if (this.hits >= 1) {
+                this.welcomeText = false;
+            }
             if (this.hits >= 10) {
                 this.pause();
                 this.ended = true;
@@ -87,8 +104,4 @@ var app = new Vue ({
             })
         }
     },
-
-    computed: {
-
-    }
 });
